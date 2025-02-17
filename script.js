@@ -1,15 +1,35 @@
-const add = new function (a, b) {
+function add(a, b) {
     return a + b;
 }
 
-const subtract = new function (a, b) {
+function subtract(a, b) {
     return a - b;
 }
 
-const multiply = new function (a, b) {
+function multiply(a, b) {
     return a * b;
 }
 
-const divide = new function (a, b) {
+function divide(a, b) {
     return a / b;
 }
+
+function operate(firstNumber, secondNumber, operator) {
+    if (operator === "+") {
+        return add(firstNumber, secondNumber)
+    }
+    if (operator === "-") {
+        return subtract(firstNumber, secondNumber)
+    }
+    if (operator === "x") {
+        return multiply(firstNumber, secondNumber)
+    }
+    if (operator === "/") {
+        return divide(firstNumber, secondNumber)
+    }
+
+}
+
+let firstNumber = 0;
+let secondNumber = 0;
+let operator = "";
