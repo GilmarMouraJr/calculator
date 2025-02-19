@@ -32,13 +32,16 @@ function operate(firstNumber, secondNumber, operator) {
 function addToDisplay(){
     let number = this.textContent;
     display.textContent += number;
+    currentNum = display.textContent;
 }
 
+const display = document.getElementById("displayP");
+let currentNum = display.textContent;
 
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
-const display = document.getElementById("displayP");
+
 
 const numBtn = document.querySelectorAll(".num");
 numBtn.forEach((btn) => {
