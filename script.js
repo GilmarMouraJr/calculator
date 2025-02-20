@@ -11,7 +11,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    if (b != 0){
+        return a / b;
+    }
 }
 
 function operate(firstNumber, secondNumber, operator) {
@@ -28,6 +30,8 @@ function operate(firstNumber, secondNumber, operator) {
         currentNum = divide(firstNumber, secondNumber)
     }
     display.textContent = currentNum;
+    secondNumber = 0;
+    isSecondNum = false;
 }
 
 function addToDisplay(){
@@ -35,31 +39,52 @@ function addToDisplay(){
         display.textContent = "";
         operatorSelected = false;
     }
+    
+    if(isFirstNum && !isSecondNum){
+        isSecondNum = true;
+    }
+
     let number = this.textContent;
     display.textContent += number;
-    currentNum = display.textContent;
+    currentNum = Number(display.textContent);
 }
 
 function processOperator(){
-    if (!isFirstNum){
+    operatorSelected = true;
+    if (!isFirstNum && display.textContent!=""){
         firstNumber = currentNum;
         isFirstNum = true;
         operator = this.textContent;
-        operatorSelected = true;
-    } else {
+    } else if(isSecondNum){
         secondNumber = currentNum;
         operate(firstNumber, secondNumber, operator);
         firstNumber = currentNum;
         operator = this.textContent;
-        operatorSelected = true;
     }
 }
 
 function equals(){
-    if(isFirstNum){
+    if(isFirstNum && isSecondNum){
         secondNumber = currentNum;
         operate(firstNumber, secondNumber, operator);
+        firstNumber = currentNum;
+        operatorSelected = true;
     }
+}
+
+function clear(){
+    display.textContent = "";
+    reset();
+}
+
+function reset(){
+    firstNumber = 0;
+    secondNumber = 0;
+    currentNum = 0;
+    operator = "";
+    isFirstNum = false;
+    isSecondNum = false;
+    operatorSelected = false;
 }
 
 const display = document.getElementById("displayP");
@@ -69,8 +94,8 @@ let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
 let isFirstNum = false;
+let isSecondNum = false;
 let operatorSelected = false;
-let isNumSelected = false;
 
 const numBtn = document.querySelectorAll(".num");
 numBtn.forEach((btn) => {
@@ -84,3 +109,6 @@ opBtn.forEach((btn) => {
 
 const equalsBtn = document.getElementById("equals");
 equalsBtn.addEventListener("click", equals);
+
+const clearBtn = document.getElementById("clear");
+clearBtn.addEventListener("click", clear)
