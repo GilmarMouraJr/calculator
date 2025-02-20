@@ -27,6 +27,11 @@ function operate(firstNumber, secondNumber, operator) {
         currentNum = multiply(firstNumber, secondNumber)
     }
     if (operator === "/") {
+        if(secondNumber === 0){
+            errorOccurred = true;
+            display.textContent = "ERROR!"
+            return;
+        }
         currentNum = divide(firstNumber, secondNumber)
     }
     display.textContent = currentNum;
@@ -35,9 +40,11 @@ function operate(firstNumber, secondNumber, operator) {
 }
 
 function addToDisplay(){
-    if(operatorSelected){
+    
+    if(operatorSelected || errorOccurred){
         display.textContent = "";
         operatorSelected = false;
+        errorOccurred = false;
     }
     
     if(isFirstNum && !isSecondNum){
@@ -54,19 +61,28 @@ function processOperator(){
     if (!isFirstNum && display.textContent!=""){
         firstNumber = currentNum;
         isFirstNum = true;
-        operator = this.textContent;
     } else if(isSecondNum){
         secondNumber = currentNum;
         operate(firstNumber, secondNumber, operator);
+        if(errorOccurred){
+            reset();
+            operatorSelected = true;
+            errorOccurred = false;
+            return;
+        }
         firstNumber = currentNum;
-        operator = this.textContent;
     }
+    operator = this.textContent;
 }
 
 function equals(){
     if(isFirstNum && isSecondNum){
         secondNumber = currentNum;
         operate(firstNumber, secondNumber, operator);
+        if(errorOccurred){
+            reset();
+            return;
+        }
         firstNumber = currentNum;
         operatorSelected = true;
     }
@@ -96,6 +112,7 @@ let operator = "";
 let isFirstNum = false;
 let isSecondNum = false;
 let operatorSelected = false;
+let errorOccurred = false;
 
 const numBtn = document.querySelectorAll(".num");
 numBtn.forEach((btn) => {
