@@ -40,7 +40,11 @@ function operate(firstNumber, secondNumber, operator) {
 }
 
 function addToDisplay(key){
-    
+    console.log(display.textContent);
+    if(display.textContent === "0"){
+        display.textContent = ""
+    }
+
     if(operatorSelected || errorOccurred){
         display.textContent = "";
         operatorSelected = false;
@@ -77,10 +81,10 @@ function processOperator(key){
         }
         firstNumber = currentNum;
     }
-    if(key.textContent == ""){
-        operator = this.textContent;
-    } else {
+    if(typeof key === "string"){
         operator = key;
+    } else {
+        operator = this.textContent;
     }
 }
 
@@ -98,7 +102,7 @@ function equals(){
 }
 
 function clear(){
-    display.textContent = "";
+    display.textContent = "0";
     reset();
 }
 
@@ -121,7 +125,12 @@ function addPoint(){
 }
 
 function eraseLast(){
-    display.textContent = display.textContent.slice(0, -1);
+    newText = display.textContent.slice(0, -1);
+    if(newText === ""){
+        newText = "0";
+        
+    }
+    display.textContent = newText;
     currentNum = Number(display.textContent);
 
     if (isSecondNum) {
@@ -176,13 +185,11 @@ document.addEventListener("keydown", (event) => {
     }
 
     if(event.key == "Enter" || event.key == "="){
-        event.preventDefault;
         equals();
     }
     
     if(event.key == "Backspace"){
-        event.preventDefault;
-        eraseLast();321
+        eraseLast();
     }
 
     if(event.key === "." || event.key === ","){
