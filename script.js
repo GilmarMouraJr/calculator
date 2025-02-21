@@ -103,6 +103,14 @@ function reset(){
     operatorSelected = false;
 }
 
+function addPoint(){
+    let point = ".";
+    if(display.textContent.includes(point)){
+        return;
+    }
+    display.textContent += point;
+}
+
 const display = document.getElementById("displayP");
 let currentNum = display.textContent;
 
@@ -129,3 +137,6 @@ equalsBtn.addEventListener("click", equals);
 
 const clearBtn = document.getElementById("clear");
 clearBtn.addEventListener("click", clear)
+
+const pointBtn = document.getElementById("point");
+pointBtn.addEventListener("click", addPoint)
