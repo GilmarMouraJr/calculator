@@ -39,7 +39,7 @@ function operate(firstNumber, secondNumber, operator) {
     isSecondNum = false;
 }
 
-function addToDisplay(){
+function addToDisplay(key){
     
     if(operatorSelected || errorOccurred){
         display.textContent = "";
@@ -51,12 +51,17 @@ function addToDisplay(){
         isSecondNum = true;
     }
 
-    let number = this.textContent;
+    let number;
+    if(isNaN(key)){
+        number = this.textContent
+    } else {
+        number = key;
+    }
     display.textContent += number;
     currentNum = Number(display.textContent);
 }
 
-function processOperator(){
+function processOperator(key){
     operatorSelected = true;
     if (!isFirstNum && display.textContent!=""){
         firstNumber = currentNum;
@@ -72,7 +77,11 @@ function processOperator(){
         }
         firstNumber = currentNum;
     }
-    operator = this.textContent;
+    if(key.textContent == ""){
+        operator = this.textContent;
+    } else {
+        operator = key;
+    }
 }
 
 function equals(){
@@ -105,13 +114,26 @@ function reset(){
 
 function addPoint(){
     let point = ".";
-    if(display.textContent.includes(point)){
+    if(display.textContent.includes(point) || display.textContent==""){
         return;
     }
     display.textContent += point;
 }
 
+function eraseLast(){
+    display.textContent = display.textContent.slice(0, -1);
+    currentNum = Number(display.textContent);
+
+    if (isSecondNum) {
+        secondNumber = currentNum;
+    } else {
+        firstNumber = currentNum;
+    }
+}
+
+
 const display = document.getElementById("displayP");
+const ops = ["+","-","x","/"];
 let currentNum = display.textContent;
 
 let firstNumber = 0;
@@ -140,3 +162,30 @@ clearBtn.addEventListener("click", clear)
 
 const pointBtn = document.getElementById("point");
 pointBtn.addEventListener("click", addPoint)
+
+const backBtn = document.getElementById("backspace");
+backBtn.addEventListener("click", eraseLast)
+
+document.addEventListener("keydown", (event) => {
+    if(!isNaN(event.key)){
+        addToDisplay(event.key);
+    }
+
+    if(ops.includes(event.key)){
+        processOperator(event.key);
+    }
+
+    if(event.key == "Enter" || event.key == "="){
+        event.preventDefault;
+        equals();
+    }
+    
+    if(event.key == "Backspace"){
+        event.preventDefault;
+        eraseLast();321
+    }
+
+    if(event.key === "." || event.key === ","){
+        addPoint();
+    }
+})
