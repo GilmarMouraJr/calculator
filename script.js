@@ -23,7 +23,7 @@ function operate(firstNumber, secondNumber, operator) {
     if (operator === "-") {
         currentNum = subtract(firstNumber, secondNumber)
     }
-    if (operator === "x") {
+    if (operator === "x" || operator === "X") {
         currentNum = multiply(firstNumber, secondNumber)
     }
     if (operator === "/") {

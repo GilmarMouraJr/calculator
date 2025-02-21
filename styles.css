@@ -1,0 +1,106 @@
+:root {
+    --bg-main: #3A4764;
+    --bg-display: #182034;
+    --bg-buttons: #232C43;
+    --button-primary: hsl(30, 25%, 89%);
+    --button-primary-hover: hsl(0, 0%, 100%);
+    --button-alt: hsl(225, 21%, 49%);
+    --button-alt-hover: hsl(224, 51%, 76%);
+    --button-important: hsl(6, 63%, 50%);
+    --button-important-hover: hsl(6, 93%, 67%);
+    --button-text: #444B5A;
+    --text: #FFFFFF;
+}
+
+* {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    background-color: var(--bg-main);
+    font-family: "Tiny5", serif;
+    font-weight: 400;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 70px;
+    color: var(--text);
+}
+
+#calculator {
+    margin: 50px auto;
+    width: 700px;
+    padding: 30px;
+}
+
+#display {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    padding: 40px;
+    height: 180px;
+    margin: auto;
+    background-color: var(--bg-display);
+}
+
+#display p {
+    background-color: inherit;
+    font-size: 80px;
+    color: var(--text);
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0 20px;
+    background-color: var(--bg-buttons);
+    margin: 20px auto;
+    height: 500px;
+}
+
+.buttons button {
+    border: 0;
+    width: 18%;
+    height: 11%;
+    font-size: 50px;
+}
+
+.buttons button:active {
+    scale: 0.9;
+}
+
+.num, .op, #point {
+    background-color: var(--button-primary);
+    color: var(--button-text);
+}
+
+.num:hover, .op:hover, #point:hover {
+    background-color: var(--button-primary-hover);
+    color: var(--button-text);
+}
+
+.special {
+    background-color: var(--button-alt);
+}
+
+.special:hover {
+    background-color: var(--button-alt-hover);
+}
+
+#equals {
+    background-color: var(--button-important);
+}
+
+#equals:hover {
+    background-color: var(--button-important-hover);
+}
+
+.special, #equals {
+    color: var(--text);
+}
+
+#clear, #equals {
+    width: 39%;
+}
