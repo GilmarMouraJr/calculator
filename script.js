@@ -185,6 +185,7 @@ document.addEventListener("keydown", (event) => {
     }
 
     if(event.key == "Enter" || event.key == "="){
+        event.preventDefault;
         equals();
     }
     
@@ -194,5 +195,9 @@ document.addEventListener("keydown", (event) => {
 
     if(event.key === "." || event.key === ","){
         addPoint();
+    }
+
+    if(event.key === "c" || event.key === "C"){
+        clear();
     }
 })
